@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAudioProducts } from '../redux/actions/ProductActions.js';
+import { fetchAudioProducts } from '../redux/actions/ProductActions';
 
 const ProductCards = () => {
   const dispatch = useDispatch();
