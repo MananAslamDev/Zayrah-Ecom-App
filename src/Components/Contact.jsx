@@ -142,11 +142,11 @@ const Contact = () => {
   return (
     <div id="contact">
       <div className="bg-white rounded-3xl p-8 md:p-12">
-        <h1 className="text-2xl text-gray-500 font-bold mb-8">CONTACT</h1>
+        <h1 className="text-2xl text-[#4b0d0d] font-bold mb-8">CONTACT</h1>
 
         <div className="grid md:grid-cols-2 gap-8">
           <div>
-            <h3 className="text-xl text-gray-500 font-bold mb-4">
+            <h3 className="text-xl text-[#4b0d0d] font-bold mb-4">
               Drop Me a Message
             </h3>
             <p className="text-gray-500 mb-6">
@@ -161,7 +161,7 @@ const Contact = () => {
                 </div>
                 <a
                   href="tel:+923234594767"
-                  className="hover:text-[#000000] transition-colors duration-200"
+                  className="hover:text-[#4b0d0d] transition-colors duration-200"
                   aria-label="Call +92 323 4594767"
                 >
                   +92 323 4594767
@@ -174,7 +174,7 @@ const Contact = () => {
                 </div>
                 <a
                   href="mailto:mananaslamdev@gmail.com"
-                  className="hover:text-[#000000] transition-colors duration-200"
+                  className="hover:text-[#4b0d0d] transition-colors duration-200"
                   aria-label="Email mananaslamdev@gmail.com"
                 >
                   mananaslamdev@gmail.com
@@ -189,7 +189,7 @@ const Contact = () => {
                   href="https://www.google.com/maps/place/Lahore,+Pakistan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#000000] transition-colors duration-200"
+                  className="hover:text-[#4b0d0d] transition-colors duration-200"
                   aria-label="View Lahore, Pakistan on Google Maps"
                 >
                   Lahore, Pakistan
@@ -313,7 +313,7 @@ const Contact = () => {
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out bg-[#4bodod] shadow-sm hover:shadow-md"
                 style={{
                   background:
-                    hoveredIcon === item.name ? item.hoverBg : "#4bodod",
+                    hoveredIcon === item.name ? item.hoverBg : "#4b0d0d",
                 }}
                 onMouseEnter={() => setHoveredIcon(item.name)}
                 onMouseLeave={() => setHoveredIcon(null)}
