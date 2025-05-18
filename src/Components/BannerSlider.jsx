@@ -96,14 +96,14 @@ const BannerSlider = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-4 flex flex-col md:flex-row gap-1">
-      <div className="w-full md:w-2/3">
+      <div className="w-full md:w-2/3 px-4 md:px-2">
         <Slider {...settings}>
           {banners.map((banner, index) => (
             <div key={index} className="px-2">
               <img
                 src={banner.url}
                 alt={banner.alt}
-                className="w-full h-[300px] object-cover rounded-lg shadow-lg md:h-[400px]"
+                className="w-full h-[300px] object-cover rounded-lg shadow-lg md:h-[400px] sm:w"
               />
             </div>
           ))}
