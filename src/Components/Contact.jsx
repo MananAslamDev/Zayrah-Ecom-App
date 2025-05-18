@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import HeaderLogo from "/HeaderLogo.png";
+import ZayrahLogo from "/ZayrahLogo.png";
 import { useForm, ValidationError } from "@formspree/react";
 import {
   Github,
@@ -284,7 +284,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <footer className="container mx-auto py-6 border-t border-gray-800">
+      <footer className="container mx-auto p-6 border-t border-gray-800">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center mb-4 md:mb-0">
             <div
@@ -293,7 +293,7 @@ const Contact = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={HeaderLogo}
+                src={ZayrahLogo}
                 alt="Header Logo"
                 className="logo w-20 h-20 object-contain rounded"
               />

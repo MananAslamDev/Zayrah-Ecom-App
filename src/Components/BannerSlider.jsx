@@ -114,7 +114,7 @@ const BannerSlider = () => {
         {products.length > 0 && (
           <>
             <div className="col-span-2">
-              <div className="bg-white p-4 rounded-lg shadow-lg">
+              <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl">
                 <img
                   src={products[0].image}
                   alt={products[0].title}
@@ -126,7 +126,7 @@ const BannerSlider = () => {
             </div>
             {products.slice(1, 3).map((product) => (
               <div key={product.id} className="col-span-1">
-                <div className="bg-white p-4 rounded-lg shadow-lg">
+                <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl">
                   <img
                     src={product.image}
                     alt={product.title}
