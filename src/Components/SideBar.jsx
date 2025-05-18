@@ -16,7 +16,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-47 h-screen bg-[#4b0d0d] text-white flex flex-col p-4 fixed">
+    <div className="w-53 h-screen bg-[#4b0d0d] text-white flex flex-col p-4 fixed">
       <div
         className="logo-container"
         onClick={goToHome}
