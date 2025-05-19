@@ -80,7 +80,6 @@ const Sidebar = () => {
         aria-label="Main Navigation"
       >
         <div className="flex items-center justify-between p-4">
-          {/* Logo on the right */}
           <div
             className="logo-container flex items-center md:order-2"
             onClick={goToHome}

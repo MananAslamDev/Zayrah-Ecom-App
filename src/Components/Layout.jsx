@@ -6,10 +6,8 @@ import Sidebar from "./SideBar";
 export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
-      {/* Sidebar wrapper - no sticky/fixed positioning here */}
       <Sidebar />
       
-      {/* Main content area */}
       <div className="flex-1 transition-all duration-300 w-full overflow-y-auto">
         <Header />
         <main className="w-full px-2 sm:px-4 md:px-6 py-4 pt-16 md:pt-20">
