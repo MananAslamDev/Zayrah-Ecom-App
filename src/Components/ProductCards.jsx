@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAudioProducts } from "../Redux/actions/ProductActions";
+import { toast } from "react-toastify";
 
 const ProductCards = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,13 @@ const ProductCards = () => {
   // Calculate total pages
   const totalProducts = products.products?.length || 0;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  const handleAddToCart = (product) => {
+    // add-to-cart logic (e.g., dispatch an action)
+    toast.success(`${product.title.slice(0,15)} added to cart!`, {
+      toastId: `cart-${product.id}`,
+    });
+  };
 
   // Scroll to the top of the component
   const scrollToComponentTop = () => {
@@ -156,7 +164,10 @@ const ProductCards = () => {
             </p>
             <div className="mt-3 flex justify-between items-center">
               <span className="text-[#4b0d0d] font-bold">${product.price}</span>
-              <button className="bg-[#4B0d0D] text-white px-3 py-1 rounded hover:bg-[#502c2c]">
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-[#4B0d0D] text-white px-3 py-1 rounded hover:bg-[#502c2c]"
+              >
                 Add to Cart
               </button>
             </div>
