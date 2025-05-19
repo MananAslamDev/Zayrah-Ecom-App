@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAudioProducts } from "../Redux/actions/ProductActions";
+import { addToCart } from "../Redux/actions/CartActions"
 import { toast } from "react-toastify";
 
 const ProductCards = () => {
@@ -50,15 +51,16 @@ const ProductCards = () => {
   // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.products?.slice(indexOfFirstProduct, indexOfLastProduct) || [];
+  const currentProducts =
+    products.products?.slice(indexOfFirstProduct, indexOfLastProduct) || [];
 
   // Calculate total pages
   const totalProducts = products.products?.length || 0;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   const handleAddToCart = (product) => {
-    // add-to-cart logic (e.g., dispatch an action)
-    toast.success(`${product.title.slice(0,15)} added to cart!`, {
+    dispatch(addToCart(product));
+    toast.success(`${product.title.slice(0, 10)}... added to cart!`, {
       toastId: `cart-${product.id}`,
     });
   };
@@ -66,7 +68,10 @@ const ProductCards = () => {
   // Scroll to the top of the component
   const scrollToComponentTop = () => {
     if (componentRef.current) {
-      componentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      componentRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   };
 
@@ -241,7 +246,8 @@ const ProductCards = () => {
       {/* Showing results info */}
       <div className="text-center text-gray-600 mt-4">
         Showing {totalProducts > 0 ? indexOfFirstProduct + 1 : 0}-
-        {Math.min(indexOfLastProduct, totalProducts)} of {totalProducts} products
+        {Math.min(indexOfLastProduct, totalProducts)} of {totalProducts}{" "}
+        products
       </div>
     </div>
   );

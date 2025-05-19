@@ -8,6 +8,7 @@ import store from "./Redux/store";
 import Layout from "./Components/Layout";
 import LandingPage from "./Pages/LandingPage";
 import ProductsPage from "./Pages/ProductsPage";
+import CartPage from "./Pages/CartPage";
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
         </Routes>
-        {/* Add ToastContainer at the root level */}
         <ToastContainer
           position="top-right"
           autoClose={3000}
