@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAudioProducts } from "../Redux/actions/ProductActions";
 
@@ -9,13 +9,44 @@ const ProductCards = () => {
     data: products,
     error,
   } = useSelector((state) => state.products);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(8);
+
   useEffect(() => {
     dispatch(fetchAudioProducts());
-  }, []);
+  }, [dispatch]);
 
   if (loading) return <div className="text-center mt-10">Loading...</div>;
   if (error)
     return <div className="text-red-600 text-center mt-10">{error}</div>;
+
+  // Pagination logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.products?.slice(indexOfFirstProduct, indexOfLastProduct) || [];
+  
+  // Calculate total pages
+  const totalProducts = products.products?.length || 0;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
+  // Go to next page
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  
+  // Go to previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div className="p-6">
@@ -27,7 +58,7 @@ const ProductCards = () => {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.products?.map((product) => (
+        {currentProducts.map((product) => (
           <div
             key={product.id}
             className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300"
@@ -49,6 +80,61 @@ const ProductCards = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Pagination */}
+      {totalProducts > 0 && (
+        <div className="mt-8 flex justify-center">
+          <nav className="flex items-center">
+            {/* Previous button */}
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className={`px-3 py-1 mx-1 rounded ${
+                currentPage === 1
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-[#4B0d0D] text-white hover:bg-[#502c2c]"
+              }`}
+            >
+              &laquo; Prev
+            </button>
+            
+            {/* Page numbers */}
+            <div className="flex mx-2">
+              {[...Array(totalPages).keys()].map(number => (
+                <button
+                  key={number + 1}
+                  onClick={() => paginate(number + 1)}
+                  className={`px-3 py-1 mx-1 rounded ${
+                    currentPage === number + 1
+                      ? "bg-[#4B0d0D] text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
+                  }`}
+                >
+                  {number + 1}
+                </button>
+              ))}
+            </div>
+            
+            {/* Next button */}
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-1 mx-1 rounded ${
+                currentPage === totalPages
+                  ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                  : "bg-[#4B0d0D] text-white hover:bg-[#502c2c]"
+              }`}
+            >
+              Next &raquo;
+            </button>
+          </nav>
+        </div>
+      )}
+      
+      {/* Showing results info */}
+      <div className="text-center text-gray-600 mt-4">
+        Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, totalProducts)} of {totalProducts} products
       </div>
     </div>
   );

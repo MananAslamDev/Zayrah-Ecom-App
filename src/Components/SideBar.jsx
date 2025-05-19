@@ -57,7 +57,7 @@ const Sidebar = () => {
       {/* Sidebar Overlay for Mobile */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black bg-opacity-100 z-40"
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={toggleMobileSidebar}
           aria-hidden="true"
         />
@@ -65,10 +65,10 @@ const Sidebar = () => {
 
       {/* Main Sidebar */}
       <div
-        className={`h-screen bg-[#4b0d0d] text-white flex flex-col fixed transition-all duration-300 z-40
-          ${collapsed && !mobileOpen ? "w-20" : "w-64 md:w-54"}
-          ${mobileOpen ? "left-0" : "-left-full"}
-          md:left-0`}
+        className={`h-screen bg-[#4b0d0d] text-white flex flex-col transition-all duration-300
+          ${collapsed ? "md:w-20" : "md:w-64"}
+          ${mobileOpen ? "fixed w-64 left-0" : "fixed w-64 -left-full"}
+          md:sticky md:top-0 md:left-0 z-50`}
         role="navigation"
         aria-label="Main Navigation"
       >
@@ -108,25 +108,22 @@ const Sidebar = () => {
               title={item.label}
               onClick={() => {
                 setMobileOpen(false);
-                setCollapsed(true);
               }}
             >
               <item.icon size={20} />
               {(!collapsed || mobileOpen) && <span>{item.label}</span>}
             </NavLink>
           ))}
-        </nav>
-
-        {/* Chevron Toggle Button - Centered after navbar */}
-        <div className="hidden md:flex flex-1 items-center justify-center">
           <button
-            className="text-white hover:bg-[#5e1a1a] p-2 rounded-full"
+            className={`md:block-hidden text-white hover:bg-[#5e1a1a] p-2 rounded-full flex items-center ${
+              collapsed ? "justify-center" : "justify-start"
+            }`}
             onClick={toggleSidebar}
             aria-label={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {collapsed ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
           </button>
-        </div>
+        </nav>
       </div>
     </>
   );
