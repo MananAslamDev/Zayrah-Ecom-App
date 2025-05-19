@@ -30,7 +30,7 @@ export default function Header() {
           </button>
 
           {/* Navigation Icons */}
-          <div className={`flex items-center space-x-4 ${searchOpen ? "hidden" : "flex"}`}>
+          <div className={`flex items-center space-x-5 ${searchOpen ? "hidden" : "flex"}`}>
             <Link to="/cart" className="p-1 relative">
               <ShoppingCart className="text-gray-700" size={22} />
               <span className="absolute -top-1 -right-1 bg-[#4b0d0d] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">

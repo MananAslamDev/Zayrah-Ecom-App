@@ -17,7 +17,7 @@ const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Prevent body scrolling when mobile sidebar is open
+  // Prevents body scrolling when mobile sidebar is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
@@ -41,6 +41,13 @@ const Sidebar = () => {
 
   const toggleMobileSidebar = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  // Handle navigation link clicks with smooth scroll
+  const handleNavClick = (to) => {
+    navigate(to);
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -106,16 +113,15 @@ const Sidebar = () => {
                 } ${collapsed && !mobileOpen ? "justify-center" : ""}`
               }
               title={item.label}
-              onClick={() => {
-                setMobileOpen(false);
-              }}
+              onClick={() => handleNavClick(item.to)}
             >
               <item.icon size={20} />
               {(!collapsed || mobileOpen) && <span>{item.label}</span>}
             </NavLink>
           ))}
+          {/* Chevron button only visible on md and larger screens */}
           <button
-            className={`md:block-hidden text-white hover:bg-[#5e1a1a] p-2 rounded-full flex items-center ${
+            className={`md:flex hidden text-white hover:bg-[#5e1a1a] p-2 rounded-full items-center ${
               collapsed ? "justify-center" : "justify-start"
             }`}
             onClick={toggleSidebar}
