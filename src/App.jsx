@@ -31,7 +31,8 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+          theme="colored"
+          className="toast-container-custom"
         />
       </Router>
     </Provider>
