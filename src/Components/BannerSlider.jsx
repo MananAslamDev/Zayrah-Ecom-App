@@ -17,7 +17,7 @@ const BannerSlider = () => {
       try {
         const response = await axios.get('https://api.unsplash.com/search/photos', {
           params: {
-            query: 'headphones,gaming',
+            query: 'headphones, gaming',
             per_page: 10,
             orientation: 'landscape',
           },
@@ -110,7 +110,7 @@ const BannerSlider = () => {
         </Slider>
       </div>
 
-      <div className="w-full md:w-1/3 grid grid-cols-2 gap-4 px-5">
+      <div className="w-full md:w-1/3 grid-cols-2 gap-4 px-5 hidden md:hidden lg:grid">
         {products.length > 0 && (
           <>
             <div className="col-span-2">

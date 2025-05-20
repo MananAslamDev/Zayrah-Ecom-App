@@ -104,7 +104,7 @@ const Cart = () => {
                   </span>
                   <button
                     onClick={() => handleRemove(item.id, item.title)}
-                    className="text-red-600 hover:text-red-800 mt-2"
+                    className="bg-[#4b0d0d] text-white px-6 py-2 rounded mt-4 hover:bg-[#502c2c]"
                   >
                     Remove
                   </button>

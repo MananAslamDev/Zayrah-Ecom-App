@@ -15,6 +15,11 @@ export default function Header() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleCartClick = () => {
+    navigate("/cart");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <header className="bg-white shadow-sm fixed w-full top-0 z-30">
       <div className="container mx-auto px-4 py-2">
@@ -51,14 +56,14 @@ export default function Header() {
 
           {/* Navigation Icons */}
           <div className="flex items-center space-x-3">
-            <Link to="/cart" className="p-1 relative">
+            <div className="p-1 relative" onClick={handleCartClick} style={{ cursor: "pointer" }}>
               <ShoppingCart className="text-gray-700" size={20} />
               {cartItemCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-[#4b0d0d] text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {cartItemCount}
                 </span>
               )}
-            </Link>
+            </div>
             <Link to="/notifications" className="p-1 relative">
               <Bell className="text-gray-700" size={20} />
               <span className="absolute -top-1 -right-1 bg-[#4b0d0d] text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">

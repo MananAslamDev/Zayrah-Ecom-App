@@ -47,6 +47,7 @@ const Sidebar = () => {
   const handleNavClick = (to) => {
     navigate(to);
     setMobileOpen(false);
+    setCollapsed(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
