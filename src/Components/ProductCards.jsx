@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAudioProducts } from "../Redux/actions/ProductActions";
-import { addToCart } from "../Redux/actions/CartActions"
+import { addToCart } from "../Redux/actions/CartActions";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom"; 
 
 const ProductCards = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const ProductCards = () => {
   // Fetch products
   useEffect(() => {
     dispatch(fetchAudioProducts());
-  }, [dispatch]);
+  }, []);
 
   if (loading) return <div className="text-center mt-10">Loading...</div>;
   if (error)
@@ -58,11 +59,18 @@ const ProductCards = () => {
   const totalProducts = products.products?.length || 0;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product, e) => {
+    e.stopPropagation();
     dispatch(addToCart(product));
     toast.success(`${product.title.slice(0, 10)}... added to cart!`, {
       toastId: `cart-${product.id}`,
     });
+  };
+
+  const handleProductClick = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
   };
 
   // Scroll to the top of the component
@@ -154,9 +162,11 @@ const ProductCards = () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {currentProducts.map((product) => (
-          <div
+          <Link
+            onClick={handleProductClick}
+            to={`/product/${product.id}`} 
             key={product.id}
-            className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+            className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer"
           >
             <img
               src={product.image}
@@ -170,13 +180,13 @@ const ProductCards = () => {
             <div className="mt-3 flex justify-between items-center">
               <span className="text-[#4b0d0d] font-bold">${product.price}</span>
               <button
-                onClick={() => handleAddToCart(product)}
+                onClick={(e) => handleAddToCart(product, e)}
                 className="bg-[#4B0d0D] text-white px-3 py-1 rounded hover:bg-[#502c2c]"
               >
                 Add to Cart
               </button>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

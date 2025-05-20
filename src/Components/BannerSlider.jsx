@@ -17,7 +17,7 @@ const BannerSlider = () => {
       try {
         const response = await axios.get('https://api.unsplash.com/search/photos', {
           params: {
-            query: 'headphones, gaming',
+            query: 'headphones, computer',
             per_page: 10,
             orientation: 'landscape',
           },
