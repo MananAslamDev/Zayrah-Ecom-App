@@ -55,11 +55,11 @@ const Sidebar = () => {
     <>
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden fixed top-3 left-3 z-50 bg-[#4b0d0d] text-white p-2 rounded-full shadow-lg"
+        className="md:hidden fixed top-20 left-1 z-50 bg-[#4b0d0d] text-white p-2 rounded-full shadow-lg"
         onClick={toggleMobileSidebar}
         aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
       >
-        <Menu size={24} />
+        <ChevronLeft size={20} />
       </button>
 
       {/* Sidebar Overlay for Mobile */}
