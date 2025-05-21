@@ -11,6 +11,7 @@ import ProductsPage from "./Pages/ProductsPage";
 import ProductDetail from "./Components/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import OrdersPage from "./Pages/OrdersPage";
+import ProfilePage from "./Pages/ProfilePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
         </Routes>
         <ToastContainer
