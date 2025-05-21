@@ -10,6 +10,7 @@ import LandingPage from "./Pages/LandingPage";
 import ProductsPage from "./Pages/ProductsPage";
 import ProductDetail from "./Components/ProductDetails";
 import CartPage from "./Pages/CartPage";
+import OrdersPage from "./Pages/OrdersPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/orders" element={<OrdersPage />} />
           </Route>
         </Routes>
         <ToastContainer
