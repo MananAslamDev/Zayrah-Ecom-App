@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchProductById } from "../Redux/actions/SingleProductActions";
-import { addToCart } from "../Redux/actions/CartActions";
+import { fetchProductById } from "../ReduxToolKit/slices/productDetailsSlice";
+import { addToCart } from "../ReduxToolKit/slices/cartSlice";
 import { toast } from "react-toastify";
 
 const ProductDetails = () => {

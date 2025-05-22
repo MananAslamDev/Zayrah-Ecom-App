@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import store from "./Redux/store";
+import store from "./ReduxToolKit/store/store";
 import Layout from "./Components/Layout";
 import LandingPage from "./Pages/LandingPage";
 import ProductsPage from "./Pages/ProductsPage";
