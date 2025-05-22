@@ -1,4 +1,3 @@
-// src/store/store.js
 import { configureStore } from "@reduxjs/toolkit";
 import productDetailsReducer from "../slices/productDetailsSlice";
 import audioProductReducer from "../slices/audioProductSlice";
