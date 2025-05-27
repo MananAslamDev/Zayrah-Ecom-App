@@ -34,7 +34,7 @@ export default function Header() {
               <img
                 src={HeaderBannerNoBg}
                 alt="Zayrah Logo"
-                className="object-contain h-15 w-auto"
+                className="object-contain h-10 w-auto"
               />
             </div>
           </div>
