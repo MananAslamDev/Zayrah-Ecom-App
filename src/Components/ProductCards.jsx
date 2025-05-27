@@ -71,7 +71,7 @@ const WomenClothingCards = () => {
             <img
               src={product.image || "https://via.placeholder.com/300x400"}
               alt={product.name}
-              className="w-full h-[300px] object-contain lg:object-cover mb-3 rounded"
+              className="w-full h-[300px] object-contain lg:object-cover mb-3 rounded transform transition duration-500 hover:scale-105"
             />
             <h2 className="text-sm font-semibold text-gray-800 truncate mb-2">
               {product.name}
