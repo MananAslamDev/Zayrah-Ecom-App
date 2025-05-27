@@ -45,10 +45,6 @@ const ProductDetails = () => {
     inStock = false,
   } = product;
 
-  const truncatedName = name.length > 40 ? `${name.slice(0, 40)}...` : name;
-  const truncatedDescription =
-    description.length > 250 ? `${description.slice(0, 250)}...` : description;
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -58,7 +54,7 @@ const ProductDetails = () => {
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <img
                 src={image}
-                alt={truncatedName}
+                alt={name}
                 className="w-full h-96 object-contain transform transition duration-500 hover:scale-105"
               />
             </div>
@@ -67,13 +63,13 @@ const ProductDetails = () => {
           {/* Product Details */}
           <div className="lg:pl-8">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-              {truncatedName || "Product Name"}
+              {name || "Product Name"}
             </h1>
             <p className="text-3xl font-bold text-maroon-700 mb-6">
               Rs. {price}
             </p>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              {truncatedDescription}
+              {description}
             </p>
 
             <button

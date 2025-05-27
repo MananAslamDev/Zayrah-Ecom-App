@@ -76,7 +76,7 @@ const ProductSlider = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-10 text-center">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800">
+      <h2 className="text-2xl lg:text-3xl font-bold mb-8 text-gray-800">
         <span className="border-b-4 border-maroon-700 pb-1">Featured</span>{" "}
         <span>Traditional Dresses</span>
       </h2>
@@ -85,7 +85,7 @@ const ProductSlider = () => {
           <SwiperSlide key={product.id} className="p-5">
             <div className="bg-white text-gray-900 rounded-lg shadow-md hover:shadow-xl transform transition duration-300 p-5 h-[400px] flex flex-col">
               <img
-                className="w-[200px] h-[300px] object-cover rounded-md mb-3 mx-auto"
+                className="w-[200px] h-[300px] object-cover rounded-md mb-3 mx-auto transform transition duration-500 hover:scale-105"
                 src={product.image || "https://via.placeholder.com/200x300"}
                 alt={product.name}
               />
