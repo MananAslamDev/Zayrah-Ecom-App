@@ -19,6 +19,7 @@
     "lucide-react": "^0.510.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-paginate": "^8.3.0",
     "react-pro-sidebar": "^1.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.0",

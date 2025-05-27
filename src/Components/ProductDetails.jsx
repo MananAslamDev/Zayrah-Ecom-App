@@ -1,4 +1,3 @@
-// components/ProductDetails.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -9,33 +8,46 @@ import { toast } from "react-toastify";
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading, product } = useSelector((state) => state.productDetails);
+  const { loading, product, error } = useSelector(
+    (state) => state.productDetails
+  );
 
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
   const handleAddToCart = () => {
-    if (product?.product) {
-      dispatch(addToCart(product.product));
-      toast.success(`${product.product.title?.slice(0, 10)}... added to cart!`);
+    if (product) {
+      dispatch(addToCart({ ...product, title: product.name })); // Map name to title for cart
+      toast.success(`${product.name?.slice(0, 10)}... added to cart!`, {
+        toastId: `cart-${product.id}`,
+      });
     }
   };
 
   if (loading) return <div className="text-center mt-10">Loading...</div>;
-  if (!product?.product) return <div className="text-center mt-10">Product not found</div>;
+  if (error)
+    return <div className="text-red-600 text-center mt-10">{error}</div>;
+  if (!product || Object.keys(product).length === 0) {
+    return <div className="text-center mt-10">Product not found</div>;
+  }
 
-  // Destructure with safe access and slicing
-  const { 
-    title = "", 
-    image, 
-    price = 0, 
-    description = "", 
-    category = "N/A" 
-  } = product.product || {};
+  // Destructure with safe access and defaults
+  const {
+    name = "",
+    image = "/images/women/product001.jpg", // Default to sample image path
+    price = 0,
+    description = "No description available",
+    category = "N/A",
+    sizes = [],
+    colors = [],
+    material = "N/A",
+    inStock = false,
+  } = product;
 
-  const truncatedTitle = title.length > 40 ? `${title.slice(0, 40)}...` : title;
-  const truncatedDescription = description.length > 250 ? `${description.slice(0, 250)}...` : description;
+  const truncatedName = name.length > 40 ? `${name.slice(0, 40)}...` : name;
+  const truncatedDescription =
+    description.length > 250 ? `${description.slice(0, 250)}...` : description;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -44,33 +56,31 @@ const ProductDetails = () => {
           {/* Product Image */}
           <div className="mb-8 lg:mb-0">
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              {image && (
-                <img
-                  src={image}
-                  alt={truncatedTitle}
-                  className="w-full h-96 object-contain transform transition duration-500 hover:scale-105"
-                />
-              )}
+              <img
+                src={image}
+                alt={truncatedName}
+                className="w-full h-96 object-contain transform transition duration-500 hover:scale-105"
+              />
             </div>
           </div>
 
           {/* Product Details */}
           <div className="lg:pl-8">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-              {truncatedTitle || "Product Title"}
+              {truncatedName || "Product Name"}
             </h1>
-            <p className="text-3xl font-bold text-[#4b0d0d] mb-6">
-              ${price.toFixed(2)}
+            <p className="text-3xl font-bold text-maroon-700 mb-6">
+              Rs. {price}
             </p>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              {truncatedDescription || "Product description"}
+              {truncatedDescription}
             </p>
 
             <button
-              onClick={handleAddToCart}
-              className="w-full bg-[#4b0d0d] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#502c2c] transition-colors duration-300"
+              onClick={(e) => handleAddToCart(product, e)}
+              className="flex items-center gap-2 text-white bg-[#4B0d0D] px-3 py-1 rounded-full hover:bg-maroon-700 transition duration-300"
             >
-              Add to Cart
+              <span className="text-sm font-medium">Add to Cart</span>
             </button>
 
             {/* Additional Details */}
@@ -85,7 +95,29 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span className="text-gray-600">Stock Status</span>
-                  <span className="text-green-600">In Stock</span>
+                  <span className="text-gray-900">
+                    {inStock ? "In Stock" : "Out of Stock"}
+                  </span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                  <span className="text-gray-600">Sizes</span>
+                  <span className="text-gray-900">
+                    {Array.isArray(sizes) && sizes.length > 0
+                      ? sizes.join(", ")
+                      : "N/A"}
+                  </span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                  <span className="text-gray-600">Colors</span>
+                  <span className="text-gray-900">
+                    {Array.isArray(colors) && colors.length > 0
+                      ? colors.join(", ")
+                      : "N/A"}
+                  </span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                  <span className="text-gray-600">Material</span>
+                  <span className="text-gray-900">{material}</span>
                 </div>
               </div>
             </div>
