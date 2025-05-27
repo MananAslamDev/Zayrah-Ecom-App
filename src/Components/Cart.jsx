@@ -13,13 +13,13 @@ const Cart = () => {
     0
   );
 
-  // Handle quantity change
+  // Handle quantity change - FIXED
   const handleQuantityChange = (id, quantity) => {
     if (quantity < 1) {
       dispatch(removeFromCart(id));
       toast.info("Item removed from cart", { toastId: `remove-${id}` });
     } else {
-      dispatch(updateQuantity(id, quantity));
+      dispatch(updateQuantity({ id, quantity })); // Fixed: pass as object
     }
   };
 
@@ -68,7 +68,7 @@ const Cart = () => {
                     {item.title.slice(0, 20)}...
                   </h2>
                   <p className="text-gray-500 text-sm sm:text-base">
-                    ${item.price.toFixed(2)} x {item.quantity}
+                    Rs.{item.price.toFixed(2)} x {item.quantity}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
                     <button
@@ -82,9 +82,20 @@ const Cart = () => {
                     <input
                       type="number"
                       value={item.quantity}
-                      onChange={(e) =>
-                        handleQuantityChange(item.id, parseInt(e.target.value) || 1)
-                      }
+                      onChange={(e) => {
+                        const newQuantity = parseInt(e.target.value);
+                        // Only update if it's a valid positive number
+                        if (!isNaN(newQuantity) && newQuantity > 0) {
+                          handleQuantityChange(item.id, newQuantity);
+                        }
+                      }}
+                      onBlur={(e) => {
+                        // If input is empty or invalid on blur, reset to 1
+                        const value = parseInt(e.target.value);
+                        if (isNaN(value) || value < 1) {
+                          handleQuantityChange(item.id, 1);
+                        }
+                      }}
                       className="w-12 text-center border rounded text-sm"
                       min="1"
                     />
@@ -100,7 +111,7 @@ const Cart = () => {
                 </div>
                 <div className="flex flex-col items-end w-full sm:w-auto">
                   <span className="text-[#4b0d0d] font-bold text-sm sm:text-base">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    Rs.{(item.price * item.quantity).toFixed(2)}
                   </span>
                   <button
                     onClick={() => handleRemove(item.id, item.title)}
@@ -116,7 +127,7 @@ const Cart = () => {
           {/* Total */}
           <div className="mt-6 sm:mt-8 text-right">
             <h2 className="text-xl sm:text-2xl font-bold">
-              Total: ${totalPrice.toFixed(2)}
+              Total: Rs.{totalPrice.toFixed(2)}
             </h2>
             <button
               onClick={handleCheckout}
