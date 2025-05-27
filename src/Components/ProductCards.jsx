@@ -76,15 +76,7 @@ const WomenClothingCards = () => {
             <h2 className="text-sm font-semibold text-gray-800 truncate mb-2">
               {product.name}
             </h2>
-            <div className="flex items-center justify-between text-maroon-700 rounded mt-4">
-              <p className="text-lg font-bold">Rs. {product.price}</p>
-              <button
-                onClick={(e) => handleAddToCart(product, e)}
-                className="flex items-center gap-2 text-white bg-[#4B0d0D] px-3 py-1 rounded-full hover:bg-maroon-700 transition duration-300"
-              >
-                <span className="text-sm font-medium">Add to Cart</span>
-              </button>
-            </div>
+              <p className="text-lg font-bold text-maroon-700">Rs. {product.price}</p>
           </Link>
         ))}
       </div>
