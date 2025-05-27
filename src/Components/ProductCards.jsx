@@ -76,7 +76,9 @@ const WomenClothingCards = () => {
             <h2 className="text-sm font-semibold text-gray-800 truncate mb-2">
               {product.name}
             </h2>
-              <p className="text-lg font-bold text-maroon-700">Rs. {product.price}</p>
+            <p className="text-lg font-bold text-maroon-700">
+              Rs. {product.price}
+            </p>
           </Link>
         ))}
       </div>
