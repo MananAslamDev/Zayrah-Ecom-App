@@ -1,49 +1,34 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import Slider from "react-slick";
-import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const UNSPLASH_ACCESS_KEY = "DAOARPnuKHIs1PPXsV2LukRCP_6laYKIoSHhaOSl3y4";
+// Image imports from public folder (Vite)
+import Banner01 from "/images/Banner/Banner01.png";
+import Banner02 from "/images/Banner/Banner02.png";
+import Banner03 from "/images/Banner/Banner03.png";
+import Banner04 from "/images/Banner/Banner04.png";
+import Banner05 from "/images/Banner/Banner05.png";
+import Banner06 from "/images/Banner/Banner06.png";
+import Banner07 from "/images/Banner/Banner07.png";
+import Banner08 from "/images/Banner/Banner08.png";
+import Banner09 from "/images/Banner/Banner09.png";
+import Banner10 from "/images/Banner/Banner10.png";
+
+const banners = [
+  { url: Banner01, alt: "Maroon Eastern Embroidered Suit" },
+  { url: Banner02, alt: "Western Navy Blue Maxi Dress" },
+  { url: Banner03, alt: "Bridal Royal Blue Lehenga" },
+  { url: Banner04, alt: "Eastern Pink Lawn Suit" },
+  { url: Banner05, alt: "Western Coral Midi Dress" },
+  { url: Banner06, alt: "Bridal Maroon Velvet Lehenga" },
+  { url: Banner07, alt: "Eastern Olive Green Suit" },
+  { url: Banner08, alt: "Western Teal Off-Shoulder Dress" },
+  { url: Banner09, alt: "Bridal Ivory Silk Lehenga" },
+  { url: Banner10, alt: "Eastern Cream Embroidered Suit" },
+];
 
 const WomenClothingCards = () => {
-  const [banners, setBanners] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const sliderRef = useRef(null);
-
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const response = await axios.get("https://api.unsplash.com/search/photos", {
-          params: {
-            query: "traditional-maroon-clothes", // Updated query
-            per_page: 10,
-            orientation: "landscape",
-          },
-          headers: {
-            Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
-          },
-        });
-        const bannerData = response.data.results.map((photo) => ({
-          url: photo.urls.regular,
-          alt: photo.alt_description || `Traditional Pakistani Women Dress ${photo.id}`,
-        }));
-        setBanners(bannerData);
-      } catch (err) {
-        setError(err.response?.data?.errors?.[0] || err.message);
-      }
-    };
-
-    const fetchData = async () => {
-      setLoading(true);
-      await fetchBanners();
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
   const settings = {
     dots: true,
     infinite: true,
@@ -60,6 +45,7 @@ const WomenClothingCards = () => {
       {
         breakpoint: 768,
         settings: {
+          slidesToShow: 1,
           arrows: false,
           dots: true,
         },
@@ -67,23 +53,11 @@ const WomenClothingCards = () => {
     ],
   };
 
-
-  if (loading) {
-    return <div className="text-center py-4">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center py-4 text-red-500">Error: {error}</div>;
-  }
-
-  if (banners.length === 0) {
-    return <div className="text-center py-4">No banners available</div>;
-  }
-
   return (
-    <div className="p-6">
-      <div className="w-full max-w-7xl mx-auto">
-        <Slider{...settings}>
+    <div>
+      {/* Banner Slider */}
+      <div className="w-full max-w-7xl mx-auto mb-8">
+        <Slider {...settings}>
           {banners.map((banner, index) => (
             <div key={index} className="px-2">
               <img
