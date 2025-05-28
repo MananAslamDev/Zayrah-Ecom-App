@@ -36,14 +36,6 @@ const CategoryProductCards = ({ initialCategory = "Eastern" }) => {
   const offset = currentPage * productsPerPage;
   const currentProducts = productList.slice(offset, offset + productsPerPage);
 
-  const handleAddToCart = (product, e) => {
-    e.stopPropagation();
-    dispatch(addToCart({ ...product, title: product.name }));
-    toast.success(`${product.name.slice(0, 10)}... added to cart!`, {
-      toastId: `cart-${product.id}`,
-    });
-  };
-
   const handleProductClick = () => {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -118,9 +110,8 @@ const CategoryProductCards = ({ initialCategory = "Eastern" }) => {
               <p className="text-lg font-bold">Rs. {product.price}</p>
               <button
                 className="flex items-center gap-2 text-white bg-[#4B0d0D] px-3 py-1 rounded-full hover:bg-maroon-700 transition duration-300"
-                onClick={(e) => handleAddToCart(product, e)}
               >
-                <span className="text-sm font-medium">Add to Cart</span>
+                <span className="text-sm font-medium">View Details</span>
               </button>
             </div>
           </Link>
