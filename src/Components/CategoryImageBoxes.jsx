@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Images
 import EasternImage from "/images/Categories/eastern.png";
@@ -12,33 +13,97 @@ const categories = [
 ];
 
 const CategoryImageBoxes = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  const boxVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const imageVariants = {
+    initial: { scale: 1 },
+    hover: { scale: 1.1, transition: { duration: 0.5 } },
+  };
+
+  const textVariants = {
+    initial: { scale: 1, opacity: 0.8 },
+    hover: { scale: 1.25, opacity: 1, transition: { duration: 0.3 } },
+  };
+
+  const overlayVariants = {
+    initial: { background: "rgba(0, 0, 0, 0)" },
+    hover: { background: "rgba(0, 0, 0, 0.3)", transition: { duration: 0.3 } },
+  };
+
   return (
     <section className="py-12 px-4 md:px-16">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        <motion.h2
+          variants={headingVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-3xl font-bold text-center text-gray-800 mb-8"
+        >
           Explore Our Collections
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="relative bg-white rounded-lg shadow-md overflow-hidden group w-full h-60 md:h-80"
-            >
-              {/* Image */}
-              <img
-                src={category.image}
-                alt={`${category.name} Collection`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              {/* Lightened Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
-                <h3 className="text-xl md:text-2xl font-semibold text-white text-center group-hover:scale-125 transition-transform duration-200">
-                  {category.name}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
+        </motion.h2>
+        <AnimatePresence>
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {categories.map((category, index) => (
+              <motion.div
+                key={index}
+                variants={boxVariants}
+                initial="initial"
+                whileHover="hover"
+                className="relative bg-white rounded-lg shadow-md overflow-hidden group w-full h-60 md:h-80"
+              >
+                {/* Image */}
+                <motion.img
+                  src={category.image}
+                  alt={`${category.name} Collection`}
+                  className="w-full h-full object-cover"
+                  variants={imageVariants}
+                />
+
+                {/* Overlay */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  variants={overlayVariants}
+                >
+                  <motion.h3
+                    className="text-xl md:text-2xl font-semibold text-white text-center"
+                    variants={textVariants}
+                  >
+                    {category.name}
+                  </motion.h3>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
