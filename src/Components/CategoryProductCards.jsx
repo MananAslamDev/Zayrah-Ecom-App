@@ -100,6 +100,7 @@ const CategoryProductCards = ({ initialCategory = "Eastern" }) => {
           >
             <img
               src={product.image || "https://via.placeholder.com/300x400"}
+              loading="lazy"
               alt={product.name}
               className="w-full h-[300px] object-contain lg:object-cover mb-3 rounded transform transition duration-500 hover:scale-105"
             />
