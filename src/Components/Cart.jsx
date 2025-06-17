@@ -4,6 +4,7 @@ import { removeFromCart, updateQuantity } from "../ReduxToolKit/slices/cartSlice
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe("pk_test_51Ravc5G1DGsNOxeGiPMsi3SX63TBa5ts5scmlAY9JesxswtgR90YnSGVbu25fqXlZEdaasOaoa2MHoyXVEYo2Mft00ti9tDuPo");
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
