@@ -12,6 +12,7 @@
   "dependencies": {
     "@formspree/react": "^3.0.0",
     "@reduxjs/toolkit": "^2.8.2",
+    "@stripe/stripe-js": "^7.3.1",
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
     "framer-motion": "^12.15.0",

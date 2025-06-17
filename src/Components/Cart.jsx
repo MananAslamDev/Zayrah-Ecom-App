@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../ReduxToolKit/slices/cartSlice";
 import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -32,11 +33,33 @@ const Cart = () => {
   };
 
   // Handle checkout
-  const handleCheckout = () => {
-    toast.error("Checkout not implemented yet!", {
-      toastId: "checkout-error",
+  const handleCheckout = async () => {
+  try {
+    if (cartItems.length === 0) return;
+
+    const res = await fetch("http://localhost:5000/api/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: cartItems }),
     });
-  };
+
+    const { id } = await res.json();
+    const stripe = await stripePromise;
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: id,
+    });
+
+    if (result.error) {
+      toast.error(result.error.message);
+    }
+  } catch (err) {
+    toast.error("Failed to initiate checkout.");
+    console.error(err);
+  }
+};
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto">
