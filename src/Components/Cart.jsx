@@ -37,7 +37,7 @@ const Cart = () => {
   try {
     if (cartItems.length === 0) return;
 
-    const res = await fetch("http://localhost:5000/api/create-checkout-session", {
+    const res = await fetch("https://zayrah-backend.onrender.com/api/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
