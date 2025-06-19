@@ -9,4 +9,8 @@ module.exports = {
     },
     plugins: [],
   };
-  
+  const { parkui } = require('@park-ui/tailwind-plugin');
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  plugins: [parkui()],
+};
